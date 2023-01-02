@@ -1,0 +1,177 @@
+@font-face {
+    font-family: "CustomFont";
+    src: url("../Copperplate\ Gothic\ Bold\ Regular/Copperplate Gothic Bold Regular.ttf");
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+::selection {
+    background-color: #d9ae00;
+    color: #0d142b;
+}
+
+body {
+    background-image: url("../img/hero3.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.navbar {
+    background: #0d142b !important;
+    border-bottom: dashed #d9ae00 2px;
+    /* height: 7rem; */
+}
+
+.navbar-nav>li>a {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #d9ae00 !important;
+    transition: all .4s;
+}
+
+.navbar-nav>li>a:hover {
+    transition: all .4s;
+    filter: brightness(1.2);
+}
+
+
+.navbar-brand {
+    color: #d9ae00 !important;
+    font-family: CustomFont !important;
+    font-size: 3rem;
+}
+
+.img {
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: moving 4s linear forwards;
+}
+
+.flash {
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: moving2 4s linear forwards;
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
+.glossy {
+    /* From https://css.glass */
+    background: rgba(13, 20, 43, 0.67);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.btn-main {
+    background: #d9ae00;
+    color: #0d142b;
+}
+
+.second-color {
+    color: #d9ae00;
+}
+
+.btn-main:hover {
+    filter: brightness(1.3);
+}
+
+.filter {
+    filter: brightness(.9);
+}
+
+.nav-link-bg {
+    transition: all ease-in-out .4s;
+    border-radius: 10px;
+}
+
+.nav-link-bg:hover {
+    background-color: #d9ae00;
+    transition: all ease-in-out .4s;
+
+}
+
+.nav-link-bg>a {
+    transition: all ease-in-out .4s;
+}
+
+.nav-link-bg>a:hover {
+    transition: all ease-in-out .4s;
+    color: #0d142b !important;
+}
+
+
+
+@media (min-width:992px) {
+    .col-lg-mo {
+        flex: 0 0 auto;
+        width: 20%
+    }
+
+    .card-effect {
+        transition: all .4s;
+    }
+
+    .card-effect:hover {
+        transition: all .4s;
+        transform: translate(1em, -1em);
+    }
+}
+
+@keyframes moving {
+    0% {
+        left: 0%;
+    }
+
+    25% {
+        left: 20%;
+    }
+
+    50% {
+        left: 40%;
+    }
+
+    75% {
+        left: 60%;
+    }
+
+    100% {
+        left: 80%;
+    }
+}
+
+@keyframes moving2 {
+    0% {
+        left: 0%;
+        opacity: 0;
+    }
+
+    25% {
+
+        left: 15%;
+        opacity: 0;
+    }
+
+    50% {
+        left: 35%;
+        opacity: 0;
+    }
+
+    75% {
+        left: 55%;
+        opacity: .5;
+    }
+
+    100% {
+        left: 75%;
+        opacity: 1;
+    }
+}

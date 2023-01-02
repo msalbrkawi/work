@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./js/main.js"></script>
+    <script defer src="./js/bs.js"></script>
+    <link rel="shortcut icon" href="./img/tab.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/bs.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <title>3B TAXI</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand ms-lg-3" href="#">3B Taxi</a>
+        <div class="d-lg-block d-none w-60">
+          <img
+            class="img"
+            src="./img/smoke.png"
+            style="width: 2rem; margin-bottom: -3rem"
+          />
+          <img
+            class="img"
+            src="./img/tab.png"
+            style="width: 5rem; margin-bottom: -3.2rem"
+          /><img
+            class="flash"
+            src="./img/flash.jpg"
+            style="width: 5rem; margin-bottom: -3.2rem"
+          />
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav d-flex align-items-lg-center">
+            <li class="nav-item nav-link-bg">
+              <a style="font-size: 1.6rem" class="nav-link" href="#booking"
+                >Reserveren</a
+              >
+            </li>
+            <li class="nav-item mx-lg-5 nav-link-bg">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><img
+                  src="./img/image (2).png"
+                  class="img-fluid"
+                  style="width: 3.3rem"
+                  alt=""
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="container-fluid">
+        <div
+          class="row py-1 d-flex justify-content-lg-evenly justify-content-center"
+        >
+          <div class="col-12 col-lg-mo m-5">
+            <a class="text-decoration-none" href="#booking">
+              <div class="card glossy shadow card-effect">
+                <img
+                  src="./img/Reserveren.jpg"
+                  class="card-img-top filter"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title second-color text-center display-5">
+                    Reserveren
+                  </h5>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-12 col-lg-mo m-5">
+            <a class="text-decoration-none" href="#contact">
+              <div class="card glossy shadow card-effect">
+                <img
+                  src="./img/overons.jpg"
+                  class="card-img-top filter"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title second-color text-center display-5">
+                    Contact
+                  </h5>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-12 col-lg-mo m-5">
+            <div class="card glossy shadow card-effect">
+              <img
+                src="./img/contact.jpg"
+                class="card-img-top filter"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title second-color text-center display-5">
+                  Over ons
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row my-5">
+        <div class="col-12">
+          <div class="card glossy shadow">
+            <div class="card-body">
+              <p class="second-color text-center fs-3 lead">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Necessitatibus sunt doloremque, quibusdam vitae tenetur tempora
+                cupiditate qui similique quisquam earum ad repudiandae culpa,
+                suscipit quasi voluptatibus placeat! Dolor, est obcaecati.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2" id="booking"></div>
+    <div style="margin-top: 10%" id="booking">
+      <div class="container">
+        <p style="font-size: 500%" class="glossy text-center second-color">
+          Reserveren
+        </p>
+        <div class="glossy p-5 my-5">
+          <form method="post">
+            <div class="row">
+              <div class="col-12 col-lg-6 my-2">
+                <label for="name" class="form-label fs-5 second-color"
+                  >Naam:
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="name"
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label for="Telefoon" class="form-label fs-5 second-color"
+                  >Telefoon:
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="Telefoon"
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label for="E-mailadres " class="form-label fs-5 second-color"
+                  >E-mailadres:
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="E-mailadres "
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label for="GewensteTijd" class="form-label fs-5 second-color"
+                  >Gewenste Tijd:
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="datetime-local"
+                  id="GewensteTijd"
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label for="Ophaal adres" class="form-label fs-5 second-color"
+                  >Ophaal adres:
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="Ophaal adres"
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label for="bestemming " class="form-label fs-5 second-color"
+                  >Bestemming :
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="bestemming "
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label
+                  for="Aantal personen "
+                  class="form-label fs-5 second-color"
+                  >Aantal personen :
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="Aantal personen "
+                />
+              </div>
+              <div class="col-12 col-lg-6 my-2">
+                <label for="Opmerking" class="form-label fs-5 second-color"
+                  >Opmerking :
+                </label>
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="text"
+                  id="Opmerking"
+                />
+              </div>
+              <div class="col-12 my-3">
+                <input
+                  class="form-control"
+                  style="
+                    border: #d9ae00 1px solid;
+                    background-color: #0d142b;
+                    color: #d9ae00;
+                  "
+                  type="submit"
+                  value="Verzenden"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="contact" class="mt-2"></div>
+    <div style="margin-top: 10%">
+      <div class="container">
+        <p style="font-size: 500%" class="glossy text-center second-color">
+          Contact
+        </p>
+        <div class="row my-5">
+          <div class="col-12 col-lg-8">
+            <img src="./img/nature.jpg" class="img-fluid" alt="" />
+          </div>
+          <div class="col-12 col-lg-4 glossy">
+            <div
+              class="p-3 lead text-center my-3"
+              style="
+                background-color: #0d142b;
+                border: #d9ae00 1px solid;
+                border-radius: 5px;
+                color: #d9ae00;
+              "
+            >
+              CONTACT GEGEVENS
+            </div>
+            <div class="d-inline-block my-1 fs-5" style="color: #d9ae00">
+              <i class="bi bi-telephone-fill" style="color: #d9ae00"></i> 012
+              123 45 45
+            </div>
+            <br />
+            <div class="d-inline-block my-1 fs-5" style="color: #d9ae00">
+              <i class="bi bi-envelope-fill" style="color: #d9ae00"></i>
+              someone@example.com
+            </div>
+            <div class="my-1 fs-5" style="color: #d9ae00">
+              3B TAXI
+              <br />
+              Berkel, Driebergse hoek en Bleiswijk.
+              <br />
+              KVK Nr. :78592852
+              <br />
+              Btw Nr. : NL003359746B72
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="up-btn position-fixed text-warning"
+      style="bottom: 7.5%; right: 3%"
+    >
+      <a href="#"
+        ><i class="bi bi-arrow-up-circle fs-1" style="color: #d9ae00"></i
+      ></a>
+    </div>
+    <footer
+      class="d-flex justify-content-around align-items-center"
+      style="background-color: #0d142b; color: #d9ae00"
+    >
+      <div class="p-4" style="background-color: rgba(0, 0, 0, 0.025)">
+        © 2023 Copyright:
+        <a
+          class="text-reset fw-bold"
+          href="mailto:Jimmassoud2003@gmail.com
+"
+          >3B Taxi</a
+        >
+      </div>
+      <div class="d-flex justify-content-evenly align-items-center">
+        <a href="#"><i class="mx-2 fs-4 bi bi-facebook"></i></a>
+        <a href="#"
+          ><i class="mx-2 fs-4 bi bi-whatsapp" style="color: #075e54"></i
+        ></a>
+        <a href="#">
+          <i class="mx-2 fs-4 bi bi-instagram" style="color: #c13584"></i
+        ></a>
+        <a href="#">
+          <i class="mx-2 fs-4 bi bi-snapchat" style="color: #fffc00"></i
+        ></a>
+        <a href="#">
+          <i
+            class="mx-2 fs-4 bi bi-tiktok"
+            style="
+              color: #000000;
+              filter: drop-shadow(1px 1px #ff0050)
+                drop-shadow(-1px -1px #00f2ea);
+            "
+          ></i
+        ></a>
+      </div>
+    </footer>
+  </body>
+</html>
