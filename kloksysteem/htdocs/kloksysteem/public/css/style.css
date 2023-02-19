@@ -1,0 +1,38 @@
+html{
+    height: 100%;
+    box-sizing: border-box;
+}
+body{
+    box-sizing: inherit;
+    position: relative;
+    padding-bottom: 7rem;
+    min-height: 100%;
+    margin: 0;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+input,input:focus, input:active{
+    border: 1px black solid;
+    outline: none;
+}
+.input-shadow,.input-shadow:focus,.input-shadow:active{
+    box-shadow: 10px 10px 0 black;
+    transition: all .3s;
+    cursor: pointer;
+}
+.input-shadow:hover{
+    transform: translate(10px,10px);
+    box-shadow: 0 0 0 black;
+    cursor: pointer;
+}
+.container-shadow{
+    box-shadow: 10px 10px 0 black;
+}
+.rounded-btn{
+    border-radius: 50% !important;
+    border: 1px black solid !important;
+}
