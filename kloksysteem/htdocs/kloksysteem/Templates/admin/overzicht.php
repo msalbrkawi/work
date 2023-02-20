@@ -60,6 +60,25 @@ include_once('../Templates/defaults/navbar.php');
 
 </div>
 
+<dialog class="dialog">
+    <div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close close-btn"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</dialog>
 
 <?php global $msg; if (isset($msg)){
     echo $msg;
@@ -68,12 +87,22 @@ include_once('../Templates/defaults/navbar.php');
     <?php
     include_once ('../Templates/defaults/footer.php');
     ?>
+
 <script>
+    const dia = document.querySelector('.dialog');
+    const btns = document.querySelectorAll('.close-btn');
+    btns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            dia.close();
+        })
+    })
+    <?php global $script; if (isset($script)){
+        echo $script;
+    }?>
     function input(e) {
         var tbInput = document.getElementById("tbInput");
         tbInput.value = tbInput.value + e.value;
     }
-
     function del() {
         var tbInput = document.getElementById("tbInput");
         tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);

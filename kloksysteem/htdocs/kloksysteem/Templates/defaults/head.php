@@ -8,4 +8,5 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="icon" href="/img/logo.png">
     <script src="/js/bootstrap.bundle.js"></script>
+    <script src="/js/main.js" defer></script>
 </head>

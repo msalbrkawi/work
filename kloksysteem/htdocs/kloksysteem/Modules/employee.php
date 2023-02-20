@@ -145,10 +145,13 @@ function getEmployeeWithCode($code):array
 function overzicht(){
     if (isset($_POST['submit'])){
         if (!empty($_POST['inputCode'])){
+            global $script;
             $code = filter_input(INPUT_POST,'inputCode',FILTER_VALIDATE_INT);
             $employee = getEmployeeWithCode($code);
                 foreach ($employee as $data){
-                    echo $data['employee_first_name'];
+                    $script = "
+    dia.showModal();
+                    ";
             }
                 if (empty($data['code'])){
                     echo "test";
