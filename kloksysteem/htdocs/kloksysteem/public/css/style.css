@@ -37,4 +37,5 @@ input,input:focus, input:active{
     border: 1px black solid !important;
 }dialog{
     border: none!important;
+    border-radius: 20px;
  }

@@ -43,42 +43,89 @@ include_once('../Templates/defaults/navbar.php');
             </form>
         </div>
         <div class="col-xxl-6 col-12 my-3 p-5 container-shadow" style="border: 1px solid black; border-radius: 20px;">
+            <?php global $salary; foreach ($salary as $data):?>
             <div class="employee p-3 " style="border: 1px solid black; border-radius: 7px">
                 <div class="row justify-content-between align-items-center">
-                    <div class="col-4">Naam:</div>
-                    <div class="col-4">Gestaart op:</div>
-                    <div class="col-4">Status:</div>
+                    <div class="col-3">Naam:</div>
+                    <div class="col-3">Gestaart om:</div>
+                    <div class="col-3">Gestopt om:</div>
+                    <div class="col-3">Status:</div>
                 </div>
                 <div class="row">
-                    <div class="col-4">Mohammad Albrkawi</div>
-                    <div class="col-4">17:03</div>
-                    <div class="col-4">Acitve</div>
+                    <div class="col-3"><?= $data['employee_first_name']. " " .$data['employee_last_name']?></div>
+                    <div class="col-3"><?= str_replace(":00","",$data['start_date'])?></div>
+                    <div class="col-3"><?php
+                        if (!$data['end_date']){
+                            echo "--:--";
+                        }else{
+                            echo str_replace(":00","",$data['end_date']);
+                    }
+
+                        ?></div>
+                    <div class="col-3"><?= $data['status']?></div>
                 </div>
             </div>
+<!--            --><?php
+//
+//                $str = str_replace(":", ".", $data['start_date']);
+//                $float_value = floatval($str);  // this Line Convertit une chaîne en nombre à virgule flottante
+//
+//                echo $float_value + 1;
+//
+//                ?>
+            <?php endforeach;?>
         </div>
     </div>
 
 </div>
 
-<dialog class="dialog">
-    <div>
-        <div class="modal-dialog">
-            <div class="modal-content">
+<dialog class="start" style="width: 70vw;">
+        <div>
+            <div class="modal-content" style="70vw">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title me-5">Hello, <?php global $employee;  echo $employee['employee_first_name'] . " " . $employee['employee_last_name']?></h5>
                     <button type="button" class="btn-close close-btn"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <form method="post">
+                        <input class="w-100" type="time" name="startTime" id="id" value="<?= date('h:i')?>">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-btn">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <input type="submit" name="start" value="Inklokken" class="btn btn-primary">
                 </div>
+                </form>
             </div>
-        </div>
     </div>
 </dialog>
+
+<dialog class="stop" style="width: 70vw;">
+    <div>
+        <div class="modal-content" style="70vw">
+            <div class="modal-header">
+                <h5 class="modal-title me-5">Hello, <?php global $employee;  echo $employee['employee_first_name'] . " " . $employee['employee_last_name']?></h5>
+                <button type="button" class="btn-close close-btn"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div>
+                        <label for="start_time">Gestart om:</label>
+                        <input class="w-100" type="time" name="startTime" id="start_time" value="<?= str_replace(":00","",$_SESSION['salaryWithCode']['start_date'])?>
+">
+                    </div>
+                    <div>
+                        <label for=end_time">Stopeen om:</label>
+                        <input class="w-100" type="time" name="startTime" id="end_time" value="<?= date('h:i')?>">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" name="end" value="Uitklokken" class="btn btn-primary">
+            </div>
+            </form>
+        </div>
+    </div>
+
+    </dialog>
+
 
 <?php global $msg; if (isset($msg)){
     echo $msg;
@@ -89,11 +136,13 @@ include_once('../Templates/defaults/navbar.php');
     ?>
 
 <script>
-    const dia = document.querySelector('.dialog');
+    const startDia = document.querySelector('.start');
+    const endDia = document.querySelector('.stop');
     const btns = document.querySelectorAll('.close-btn');
     btns.forEach(btn => {
         btn.addEventListener("click", (e) => {
-            dia.close();
+            startDia.close();
+            endDia.close();
         })
     })
     <?php global $script; if (isset($script)){

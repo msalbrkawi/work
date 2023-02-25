@@ -60,7 +60,6 @@ include_once('../Templates/defaults/navbar.php');
 
 
 <?php
-echo
 include_once ('../Templates/defaults/footer.php');
 ?>
 </body>

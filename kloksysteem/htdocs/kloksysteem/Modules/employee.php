@@ -83,7 +83,6 @@ function registerUser()
 function getEmployees($id):array
 {
     $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
-//    $query = $db->prepare("SELECT * FROM review as r,user as u WHERE u.id=r.user_id  and r.car_id = :id");
     $query = $db->prepare("SELECT * FROM employee where manger_id = :id order by employee_first_name, employee_last_name");
     $query->bindParam("id", $id);
     $query->execute();
@@ -128,15 +127,20 @@ WHERE employee_id = :id");
 // UpdateEmployee
 
 // printEmployeeWithCode
-function getEmployeeWithCode($code):array
+function getEmployeeWithCode($code)
 {
+    global $employee;
     $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
     $query = $db->prepare("SELECT * FROM employee where code = :code");
     $query->bindParam("code",$code);
     $query->execute();
-    $employee = $query->fetchAll(PDO::FETCH_ASSOC);
+    $employee = $query->fetch(PDO::FETCH_ASSOC);
+    if (!$employee){
+        return false;
+    }else{
+        return $employee;
+    }
 
-    return  $employee;
 }
 // printEmployeeWithCode
 
@@ -145,21 +149,106 @@ function getEmployeeWithCode($code):array
 function overzicht(){
     if (isset($_POST['submit'])){
         if (!empty($_POST['inputCode'])){
-            global $script;
-            $code = filter_input(INPUT_POST,'inputCode',FILTER_VALIDATE_INT);
-            $employee = getEmployeeWithCode($code);
-                foreach ($employee as $data){
-                    $script = "
-    dia.showModal();
-                    ";
-            }
-                if (empty($data['code'])){
-                    echo "test";
+            global $employee, $script, $salary;
+            getEmployeeWithCode($_POST['inputCode']);
+            if (!$employee){
+                echo "try again!";
+            }elseif ($employee['code'] == $_POST['inputCode']){
+                $_SESSION['$employee_id'] = $employee['employee_id'];
+                $_SESSION['$employee_code'] = $employee['code'];
+
+                $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
+                $query = $db->prepare("
+SELECT * 
+FROM salary
+where day_date = :toDayDate and code = :code
+");
+                $toDayDate = date('o-m-d');
+                $query->bindParam("toDayDate", $toDayDate);
+                $query->bindParam("code", $employee['code']);
+                $query->execute();
+                $salary = $query->fetch(PDO::FETCH_ASSOC);
+                if (!$salary){
+                $script = " startDia.showModal(); ";
+                employeeStart();
+                }else if($salary['status'] == "Active"){
+                    $_SESSION['salary_id'] = $salary['salary_id'];
+                    getSalaryWithCode($_SESSION['$employee_code']);
+                    $script = " endDia.showModal(); ";
                 }
+            }
         }else{
             echo "Vul een code in!";
         }
     }
 }
 
+function employeeStart(){
+    if (isset($_POST['start'])){
+        global $startTime, $status, $toDayDate;
+        $toDayDate = date('o-m-d');
+        $startTime = $_POST['startTime'];
+        $status = "Active";
+        $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
+        $query = $db->prepare("INSERT INTO salary (day_date, start_date, status, code, employee_id, manger_id) VALUES (:day_date, :start_date, :status, :code, :employee_id, :manger_id)");
+        $query->bindParam("day_date",$toDayDate);
+        $query->bindParam("start_date",$startTime);
+        $query->bindParam("status",$status);
+        $query->bindParam("code",$_SESSION['$employee_code']);
+        $query->bindParam("employee_id",$_SESSION['$employee_id']);
+        $query->bindParam("manger_id",$_SESSION['AId']);
+        $query->execute();
+        header("location: http://kloksysteem.localhost/admin/overzicht");
+    }
+}
+
+function employeeStop($id){
+if (isset($_POST['end'])){
+    $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
+    $query = $db->prepare("update salary set status = :status where salary_id = :salary_id");
+    $status = "Not Active";
+    $query->bindParam("salary_id",$id);
+    $query->bindParam("status",$status);
+    $query->execute();
+    header("location: http://kloksysteem.localhost/admin/overzicht");
+}
+}
+
+function getSalary():array
+{
+    $toDayDate = date('o-m-d');
+    $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
+    $query = $db->prepare("
+SELECT * 
+FROM salary
+INNER JOIN employee
+ON employee.employee_id = salary.employee_id
+where day_date = :toDayDate
+order by salary.start_date
+
+");
+    $query->bindParam("toDayDate", $toDayDate);
+    $query->execute();
+    $salary = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    return  $salary;
+}
+
+function getSalaryWithCode($code)
+{
+    $toDayDate = date('o-m-d');
+    $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
+    $query = $db->prepare("
+SELECT * 
+FROM salary
+where day_date = :toDayDate and code = :code
+
+");
+    $query->bindParam("toDayDate", $toDayDate);
+    $query->bindParam("code", $code);
+    $query->execute();
+    $salaryWithCode = $query->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['salaryWithCode'] = $salaryWithCode;
+    return  $salaryWithCode;
+}
 //overzicht

@@ -43,6 +43,11 @@ if (!isAdmin()) {
         case 'overzicht':
             $titleSuffix = ' | Overzicht';
             overzicht();
+            if (isset($_SESSION['salary_id'])){
+                employeeStop($_SESSION['salary_id']);
+            }
+            employeeStart();
+            $salary = getSalary();
             include_once "../Templates/admin/overzicht.php";
             break;
 
