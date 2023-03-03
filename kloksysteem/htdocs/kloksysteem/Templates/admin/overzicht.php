@@ -65,14 +65,6 @@ include_once('../Templates/defaults/navbar.php');
                     <div class="col-3"><?= $data['status']?></div>
                 </div>
             </div>
-<!--            --><?php
-//
-//                $str = str_replace(":", ".", $data['start_date']);
-//                $float_value = floatval($str);  // this Line Convertit une chaîne en nombre à virgule flottante
-//
-//                echo $float_value + 1;
-//
-//                ?>
             <?php endforeach;?>
         </div>
     </div>
@@ -114,7 +106,7 @@ include_once('../Templates/defaults/navbar.php');
                     </div>
                     <div>
                         <label for=end_time">Stopeen om:</label>
-                        <input class="w-100" type="time" name="startTime" id="end_time" value="<?= date('h:i')?>">
+                        <input class="w-100" type="time" name="endTime" id="end_time" value="<?= date('h:i')?>">
                     </div>
             </div>
             <div class="modal-footer">

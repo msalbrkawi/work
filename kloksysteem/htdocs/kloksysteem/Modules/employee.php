@@ -135,6 +135,7 @@ function getEmployeeWithCode($code)
     $query->bindParam("code",$code);
     $query->execute();
     $employee = $query->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['uurloon'] = $employee['uurloon'];
     if (!$employee){
         return false;
     }else{
@@ -156,7 +157,6 @@ function overzicht(){
             }elseif ($employee['code'] == $_POST['inputCode']){
                 $_SESSION['$employee_id'] = $employee['employee_id'];
                 $_SESSION['$employee_code'] = $employee['code'];
-
                 $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
                 $query = $db->prepare("
 SELECT * 
@@ -167,14 +167,18 @@ where day_date = :toDayDate and code = :code
                 $query->bindParam("toDayDate", $toDayDate);
                 $query->bindParam("code", $employee['code']);
                 $query->execute();
-                $salary = $query->fetch(PDO::FETCH_ASSOC);
-                if (!$salary){
+                $salarys = $query->fetchAll(PDO::FETCH_ASSOC);
                 $script = " startDia.showModal(); ";
                 employeeStart();
-                }else if($salary['status'] == "Active"){
-                    $_SESSION['salary_id'] = $salary['salary_id'];
-                    getSalaryWithCode($_SESSION['$employee_code']);
-                    $script = " endDia.showModal(); ";
+                foreach ($salarys as $salary){
+                        if($salary['status'] == "Active"){
+                        $_SESSION['salary_id'] = $salary['salary_id'];
+                        getSalaryWithCode($_SESSION['$employee_code']);
+                        $script = " endDia.showModal(); ";
+                    }else{
+                        $script = " startDia.showModal(); ";
+                        employeeStart();
+                    }
                 }
             }
         }else{
@@ -205,8 +209,20 @@ function employeeStart(){
 function employeeStop($id){
 if (isset($_POST['end'])){
     $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
-    $query = $db->prepare("update salary set status = :status where salary_id = :salary_id");
+    $query = $db->prepare("update salary set start_date = :start_date, end_date = :end_date, total_hours = :total_hours, status = :status, salary = :salary where salary_id = :salary_id");
     $status = "Not Active";
+    $start_time = $_POST['startTime'];
+    $end_time = $_POST['endTime'];
+    $str = str_replace(":", ".", $start_time);
+    $str2 =  str_replace(":", ".", $end_time);
+    $float_value = floatval($str);
+    $float_value2 = floatval($str2);
+    $total = $float_value2 - $float_value;
+    $salary =round( $total * floatval( $_SESSION['uurloon']),2);
+    $query->bindParam("salary",$salary);
+    $query->bindParam("total_hours",$total);
+    $query->bindParam("start_date",$start_time);
+    $query->bindParam("end_date",$end_time);
     $query->bindParam("salary_id",$id);
     $query->bindParam("status",$status);
     $query->execute();
@@ -223,11 +239,15 @@ SELECT *
 FROM salary
 INNER JOIN employee
 ON employee.employee_id = salary.employee_id
-where day_date = :toDayDate
+where day_date = :toDayDate and status = :status and salary.manger_id = :manger_id
 order by salary.start_date
 
 ");
+    $status = "Active";
+    $manger_id = $_SESSION['AId'];
+    $query->bindParam("manger_id", $manger_id );
     $query->bindParam("toDayDate", $toDayDate);
+    $query->bindParam("status", $status);
     $query->execute();
     $salary = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -241,9 +261,11 @@ function getSalaryWithCode($code)
     $query = $db->prepare("
 SELECT * 
 FROM salary
-where day_date = :toDayDate and code = :code
+where day_date = :toDayDate and code = :code and salary_id = :salary_id
 
 ");
+    $salary_id = $_SESSION['salary_id'];
+    $query->bindParam("salary_id", $salary_id);
     $query->bindParam("toDayDate", $toDayDate);
     $query->bindParam("code", $code);
     $query->execute();

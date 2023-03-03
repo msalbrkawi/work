@@ -3,7 +3,7 @@
         <div class="col-12">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(24,21,21,0)">
         <div class="container-fluid">
-            <a class="navbar-brand ps-lg-5 ms-lg-5" href="/home">
+            <a class="navbar-brand ps-lg-5 ms-lg-5" href="/admin/dashboard">
                 <img class="logo img-fluid" width="125px" src="/img/logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
