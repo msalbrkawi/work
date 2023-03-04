@@ -209,16 +209,22 @@ function employeeStart(){
 function employeeStop($id){
 if (isset($_POST['end'])){
     $db = new PDO("mysql:host=localhost;dbname=kloksysteem","root","");
-    $query = $db->prepare("update salary set start_date = :start_date, end_date = :end_date, total_hours = :total_hours, status = :status, salary = :salary where salary_id = :salary_id");
+    $query = $db->prepare("update salary set year = :year, month = :month, week = :week, start_date = :start_date, end_date = :end_date, total_hours = :total_hours, status = :status, salary = :salary where salary_id = :salary_id");
     $status = "Not Active";
     $start_time = $_POST['startTime'];
     $end_time = $_POST['endTime'];
+    $month = date("M");
+    $week = date("W");
+    $year = date("o");
     $str = str_replace(":", ".", $start_time);
     $str2 =  str_replace(":", ".", $end_time);
     $float_value = floatval($str);
     $float_value2 = floatval($str2);
     $total = $float_value2 - $float_value;
     $salary =round( $total * floatval( $_SESSION['uurloon']),2);
+    $query->bindParam("year",$year);
+    $query->bindParam("month",$month);
+    $query->bindParam("week",$week);
     $query->bindParam("salary",$salary);
     $query->bindParam("total_hours",$total);
     $query->bindParam("start_date",$start_time);

@@ -5,6 +5,9 @@ include_once('../Templates/defaults/head.php');
 include_once('../Templates/defaults/navbar.php');
 ?>
 <body>
+<div class="ms-1 mb-5">
+    <a class="text-black" href="/admin/dashboard">Dashboard</a> / <a class="text-black" href="/admin/werknemmers">Werknemmers</a>
+</div>
 <div class="container">
     <div class="d-flex justify-content-center align-items-center flex-column" style="height: 80vh;">
         <div class="row">

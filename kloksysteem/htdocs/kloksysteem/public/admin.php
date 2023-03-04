@@ -6,9 +6,6 @@ if (!isAdmin()) {
     logout();
     header ("location:/inloggen");
 } else {
-/* $params[2] is de action
-   $params[3] is een getal die de delete action nodig heeft
-*/
     switch ($params[2]) {
 
         case 'dashboard':
@@ -53,8 +50,22 @@ if (!isAdmin()) {
 
         case 'werk_uren':
             $titleSuffix = ' | werk_uren';
-            $employeesSalary = employeesSalary();
+            $employees = getEmployees($_SESSION['AId']);
             include_once "../Templates/admin/working_hours.php";
+            break;
+
+        case 'werknemer_werk_uren':
+            $titleSuffix = ' | werk_uren';
+            $employee = getEmployee($params[3]);
+            if (isset($_POST['filter'])){
+                $employeesSalary = filter($params[3]);
+            }elseif (isset($_POST['reset'])){
+                $employeesSalary = employeesSalary($params[3]);
+            }
+            else{
+                $employeesSalary = employeesSalary($params[3]);
+            }
+            include_once "../Templates/admin/werknemer_werk_uren.php";
             break;
 
             default:
