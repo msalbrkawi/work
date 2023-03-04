@@ -50,8 +50,17 @@ function checkUser()
 
 function registerUser()
 {
-    $code = random_int(1111,9999);
-    global $msg,$e_f_name,$e_l_name,$e_hire_date,$e_email,$e_telefoon,$e_u_loon, $db;
+    global $msg,$e_f_name,$e_l_name,$e_hire_date,$e_email,$e_telefoon,$e_u_loon, $db, $mmsg;
+    $code = 100000;
+
+    $query = $db->prepare("select code from employee");
+    $query->execute();
+    $codes = $query->fetchAll();
+    foreach ($codes as $code2){
+        if ($code2['code'] == $code){
+           $code = $code + 1;
+        }
+    }
     $query = $db->prepare("INSERT INTO employee(employee_first_name,employee_last_name,hire_date,employee_email,employee_telefoon,uurloon, code, manger_id)
     VALUES
     (:employee_first_name, :employee_last_name, :hire_date, :employee_email, :employee_telefoon, :uurloon, :code, :manger_id)");
@@ -68,7 +77,7 @@ function registerUser()
                                 Registreren is gelukt.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>';
-        header("location: /admin/dashboard");
+//        header("location: /admin/dashboard");
     }
     else{
         $msg = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
